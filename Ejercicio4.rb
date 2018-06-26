@@ -8,7 +8,14 @@ propiedades = {nombre: 'Beethoven', raza: 'San Bernardo', color: 'Café'}
 # está ladrando!"
 
 class Dog
-    def initialize(*propiedades)
-
+    attr_reader :nombre, :raza, :color
+    def initialize args
+        args.each do |k,v|
+        instance_variable_set("@#{k}", v) unless v.nil?
+        end
     end
 end
+
+dog = Dog.new(propiedades)
+
+print dog
