@@ -1,9 +1,12 @@
 # Corrige el siguiente código para instanciar el objeto y generar la salida de manera
 # correcta.
 
-class Car(model, year)
-    @model = model
-    @year = year
+class Car
+    attr_reader :model, :year
+    def initialize(model, year)
+        @model = model
+        @year = year
+    end
 end
 
 car = Car.new('Camaro', 2016)
