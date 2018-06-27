@@ -4,12 +4,16 @@
 # El siguiente código define la clase Product y además realiza la lectura del archivo.
 
 class Product
+    attr_reader :name
     def initialize(name, large, medium, small, xsmall)
         @name = name
-        @large = large
-        @medium = medium
-        @small = small
-        @xsmall = xsmall
+        @large = large.to_i
+        @medium = medium.to_i
+        @small = small.to_i
+        @xsmall = xsmall.to_i
+    end
+    def average
+        (@large + @medium + @small + @xsmall) / 4
     end
 end
 
@@ -17,15 +21,14 @@ products_list = []
 data = []
 File.open('catalogo.txt', 'r') { |file| data = file.readlines}
 
-data.each do |prod|
-    ls = prod.split(', ')
-    products_list << Product.new(ls[0], ls[1], ls[2], ls[3], ls[4])
-end
-
-puts products_list
-
-# Ejercicio 6: Objetos y archivos.
-# Se pide:
 # Optimizar el código implementando el operador splat al momento de instanciar los
 # productos
+data.each do |prod|
+    ls = prod.split(', ')
+    products_list << Product.new(*ls)
+end
+
 # Generar un método que permita calcular el promedio de precio por producto.
+products_list.each do |product|
+    puts "#{product.name} : #{product.average}"
+end

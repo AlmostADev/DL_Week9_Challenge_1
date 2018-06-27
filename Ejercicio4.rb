@@ -9,13 +9,15 @@ propiedades = {nombre: 'Beethoven', raza: 'San Bernardo', color: 'Café'}
 
 class Dog
     attr_reader :nombre, :raza, :color
-    def initialize args
-        args.each do |k,v|
-        instance_variable_set("@#{k}", v) unless v.nil?
-        end
+    def initialize(**hash)
+        @nombre = hash[:nombre]
+        @raza = hash[:raza]
+        @color = hash[:color]
+    end
+    def ladrar
+        puts "#{nombre} está ladrando!"
     end
 end
 
 dog = Dog.new(propiedades)
-
-print dog
+dog.ladrar
